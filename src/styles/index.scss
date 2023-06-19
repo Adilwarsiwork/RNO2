@@ -1,0 +1,19 @@
+//
+@import './_theme_colors';
+@import './_theme_font';
+@import './_theme_custom';
+//
+@import './header';
+
+.nc-Button {
+	width: 100%;
+	padding: 15px;
+	text-transform: uppercase;
+	background-color: #b91c1c;
+}
+body {
+	background-color: #0b0000 !important;
+}
+.bg-neutral-900 {
+	background-color: #160101;
+}
