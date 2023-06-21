@@ -50,9 +50,9 @@ timely information to keep your audience informed. 🎈"
           categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
         />
         <SectionVideos className="py-16 lg:py-28" />
-        //Video Section start
+
         <SectionVideos2></SectionVideos2>
-        //Video Section end
+
         <SectionSubscribe2 className="pb-16 lg:pb-28" />
       </div>
     </div>
