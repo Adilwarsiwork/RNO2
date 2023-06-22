@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import SectionLargeSlider from "@/app/(home)/SectionLargeSlider";
 import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";
@@ -25,12 +26,33 @@ import SectionVideos from "@/components/Sections/SectionVideos";
 import SectionLatestPosts from "@/components/Sections/SectionLatestPosts";
 import SectionMagazine2 from "@/components/Sections/SectionMagazine2";
 
+//new imports related to redux
+import { useState, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/store/usedTypedSelector";
+import { NewsData } from "@/types/sanity-client-type";
+import { getAllNews } from "@/store/features/Slice";
+import { useIsomorphicLayoutEffect } from "usehooks-ts";
+
 //
 const MAGAZINE1_POSTS = DEMO_POSTS.filter((_, i) => i >= 8 && i < 16);
 const MAGAZINE2_POSTS = DEMO_POSTS.filter((_, i) => i >= 0 && i < 7);
 //
 
 const PageHome = ({}) => {
+  const [allNews, setAllNewss] = useState<NewsData[] | any>("Hello");
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getAllNews());
+    // console.log("console here");
+  }, [dispatch]);
+
+  const { news, error, loading } = useAppSelector((state) => state);
+
+  // console.log(allNews);
+  console.log(news);
+
   return (
     <div className="nc-PageHome relative">
       <div className="container relative">
@@ -142,3 +164,10 @@ const PageHome = ({}) => {
 };
 
 export default PageHome;
+
+//Data fetching code directly from sanity without redux
+// async function fetchNews() {
+//   const data = await getNews();
+//   setAllNewss(data);
+// }
+// fetchNews();

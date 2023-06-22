@@ -5,9 +5,11 @@ import { Poppins } from "next/font/google";
 import MusicPlayer from "@/components/MusicPlayer/MusicPlayer";
 import Footer from "@/components/Footer/Footer";
 import SiteHeader from "./SiteHeader";
-import { useState, useEffect } from "react";
-import { NewsData } from "@/types/sanity-client-type";
-import { getNews } from "@/sanity/sanity-client";
+
+import { store } from "../store/store";
+import { Provider } from "react-redux";
+
+// import { Providers } from "./Provider";
 
 export const metadata = {
   title: "Create Next App",
@@ -25,23 +27,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [news, setNews] = useState<NewsData[] | any>();
-  useEffect(() => {
-    async function fetchNews() {
-      const data = await getNews();
-      setNews(data);
-    }
-    fetchNews();
-  }, []);
-
-  console.log(news);
   return (
     <html lang="en" className={poppins.className}>
       <body className="bg-[#f8f8f8] text-base dark:bg-neutral-900/95 text-neutral-900 dark:text-neutral-200">
-        <SiteHeader />
-        {children}
-        <MusicPlayer />
-        <Footer />
+        <Provider store={store}>
+          <SiteHeader />
+          {children}
+          <MusicPlayer />
+          <Footer />{" "}
+        </Provider>
       </body>
     </html>
   );
